@@ -1,0 +1,21 @@
+<ul>
+  <ng-container *ngFor="let routine of routines">
+
+    <li>
+      <span>Objetivo: {{routine.name}}.</span>
+      <span>Objetivo: {{routine.objective}}.</span>
+      <span>Nivel: {{routine.level}}.</span>
+      <ng-container *ngFor="let exercise of routine.exercises">
+        <span>{{exercise.name}}</span>
+      </ng-container>
+      <div>
+        <span (click)="deleteRoutine(routine.id)">❌</span>
+        <a [routerLink]="[ 'addExercise', routine.id ]">
+          ✏️
+        </a>
+      </div>
+    </li>
+
+  </ng-container>
+</ul>
+<a class="añadir" [routerLink]="[ 'addRoutine']">Añadir rutina</a>

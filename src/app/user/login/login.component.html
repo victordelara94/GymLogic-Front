@@ -1,0 +1,10 @@
+<h2>Empieza tu cambio</h2>
+<form [formGroup]="loginForm" (submit)="handleSubmit()">
+  <input type="text" placeholder="Username" formControlName="userName" required>
+  <input type="password" name="" id="" placeholder="Password" formControlName="password" required>
+  <button type="input">Enviar</button>
+  <span *ngIf="errorMessage">{{errorMessage}}</span>
+
+</form>
+
+<a [routerLink]="['home']">Volver</a>

@@ -1,0 +1,7 @@
+<a *ngIf="routine" [routerLink]="[ '/routines/routine', routine.id ]">
+  <ul>
+    <li class="name">{{routine.name}}</li>
+    <li>{{routine.objective}}</li>
+    <li>{{routine.level}}</li>
+  </ul>
+</a>

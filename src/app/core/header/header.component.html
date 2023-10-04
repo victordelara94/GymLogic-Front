@@ -1,0 +1,11 @@
+<header>
+  <img src="../../assets/favicon.png" alt="Logo of GymLogic" width="70" height="70">
+  <h1><em>Gym</em>Logic</h1>
+  <div *ngIf="actualUser">
+    <button (click)="handleClick()"><mat-icon>logout</mat-icon></button>
+    <ng-container *ngIf="actualUser.user.actualRoutine">
+      <button
+        [routerLink]="[ '/routines/routine',actualUser.user.actualRoutine.id ]"><mat-icon>fitness_center</mat-icon></button>
+    </ng-container>
+  </div>
+</header>

@@ -1,0 +1,16 @@
+<div>
+  <a [routerLink]="[ '/routines/list' ]">volver</a>
+  <h2>{{routine.name}}</h2>
+  <div class="exercises">
+    <div class="exercise" *ngFor="let exercise of routine.exercises">
+
+      <h3>{{exercise.name}}</h3>
+      <img src={{exercise.image.url}} alt={{exercise.name}} width="150">
+      <div class="reps">
+        <span>{{exercise.sets}} x {{exercise.reps}}</span>
+      </div>
+    </div>
+  </div>
+  <button *ngIf="actualUser && actualUser.user.actualRoutine?.id!==routine.id" (click)="addUserRoutine()">
+    <mat-icon>add_circle</mat-icon></button>
+</div>

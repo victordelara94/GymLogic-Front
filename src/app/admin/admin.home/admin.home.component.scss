@@ -1,0 +1,48 @@
+:host {
+  background: url(../../../assets/background.png) #1e1e1e no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  gap: 1.5rem;
+  color: white;
+  overflow: scroll;
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    li {
+      background-color: rgba(255, 242, 240, 0.6);
+      padding: 2rem;
+      border-radius: 25px;
+      font-size: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      color: #1e1e1e;
+      div {
+        span {
+          font-size: 1rem;
+          margin: 0 1rem;
+        }
+        a {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  a.añadir {
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    width: 12rem;
+    text-decoration: none;
+    color: black;
+    letter-spacing: 0.1rem;
+    border-radius: 3rem;
+    background: #d43d4a;
+  }
+}

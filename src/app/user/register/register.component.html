@@ -1,0 +1,14 @@
+<a [routerLink]="[ 'home']">Volver</a>
+<form [formGroup]="registerForm" (submit)="handleSubmit()">
+
+  <input type="text" placeholder="Usuario" formControlName="userName" required>
+  <input type="password" name="" id="" placeholder="Contraseña" formControlName="password" required>
+  <input type="email" placeholder="Email" formControlName="email" required>
+  <input type="number" name="" id="" placeholder="Edad" formControlName="age" required>
+  <input type="text" placeholder="Altura" formControlName="height" required>
+  <input type="number" name="" id="" placeholder="Peso" formControlName="weight" required>
+
+  <button type="submit">Enviar</button>
+  <span *ngIf="this.errorMessage">{{this.errorMessage}}</span>
+
+</form>

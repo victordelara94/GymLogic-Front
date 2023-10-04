@@ -1,0 +1,49 @@
+:host {
+  background: url("../../assets/background.png") #1e1e1e no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  text-align: center;
+}
+
+.login-container {
+  .welcome {
+    font-size: 1.5rem;
+    color: #ffffff;
+    padding: 1.5rem;
+  }
+  a {
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-decoration: none;
+    padding: 0.5rem 1.5rem;
+    color: black;
+    letter-spacing: 0.1rem;
+    border-radius: 3rem;
+    background: #d43d4a;
+  }
+}
+
+.register-container {
+  .register {
+    font-size: 1rem;
+    color: white;
+    padding: 1.5rem;
+  }
+
+  a {
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-decoration: none;
+    padding: 0.5rem 1.5rem;
+    color: black;
+    letter-spacing: 0.1rem;
+    border-radius: 3rem;
+    background: #d43d4a;
+  }
+}

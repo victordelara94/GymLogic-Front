@@ -1,0 +1,42 @@
+.commom {
+  font-size: 2rem;
+  color: white;
+  text-align: center;
+}
+
+:host.first {
+  @extend .commom;
+  background: url(../../../assets/background.png) #1e1e1e no-repeat;
+  background-size: cover;
+}
+:host.first:hover {
+  box-shadow: 5px 5px 5px 0px white;
+}
+
+:host.second {
+  @extend .commom;
+  background: url(../../../assets/second.svg) #1e1e1e no-repeat;
+  background-size: cover;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+ul {
+  list-style: none;
+  height: 5rem;
+  width: 15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  li {
+    font-size: 1rem;
+  }
+  .name {
+    padding: 0.5rem;
+  }
+}

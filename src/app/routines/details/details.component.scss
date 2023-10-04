@@ -1,0 +1,56 @@
+:host {
+  background: url(../../../assets/background.png) #1e1e1e no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: scroll;
+  padding: 3rem 0;
+}
+
+div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  .exercises {
+    display: flex;
+    gap: 2rem;
+  }
+  button {
+    all: unset;
+    margin: 1rem 0;
+
+    transform: scale(1.5);
+    color: #d43d4a;
+    cursor: pointer;
+  }
+
+  button:active {
+    color: #d43d4a98;
+  }
+
+  h2 {
+    margin-top: 2rem;
+  }
+  h3 {
+    all: unset;
+    padding: 0.5rem;
+  }
+  a {
+    all: unset;
+    border-radius: 20px;
+    justify-content: center;
+    display: flex;
+    padding: 0.5rem 1rem;
+    background-color: #d43d4a;
+    text-transform: uppercase;
+  }
+
+  .reps {
+    display: flex;
+  }
+}

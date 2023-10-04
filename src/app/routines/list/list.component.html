@@ -1,0 +1,16 @@
+<select (change)="filterRoutines($event)">
+  <option selected disabled>Elige tu nivel</option>
+  <option value="todos">Todos</option>
+  <option value="principiante">Principiante</option>
+  <option value="intermedio">Intermedio</option>
+  <option value="avanzado">Avanzado</option>
+</select>
+
+
+<section> <ng-container *ngFor="let routine of routines">
+    <ng-container *ngIf="routine.exercises.length>0">
+      <GymLogic-card [routine]="routine"
+        [ngClass]="{'first':routines.indexOf(routine)%2 === 0,'second':routines.indexOf(routine)%2 !== 0}"></GymLogic-card>
+    </ng-container>
+  </ng-container>
+</section>
