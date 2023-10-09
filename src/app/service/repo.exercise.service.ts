@@ -11,7 +11,7 @@ export class RepoExerciseService {
   url: string;
   token: string = '';
   constructor(private http: HttpClient, private stateService: StateService) {
-    this.url = 'http://localhost:3333/exercises';
+    this.url = 'https://gymlogic-back.onrender.com/exercises';
     this.stateService.state$.subscribe((state) => {
       if (!state.actualUser) {
         this.token = '';

@@ -30,7 +30,9 @@ describe('RepoExerciseService', () => {
   it('should send a POST request when calling create', () => {
     repoExerciseService.create(mockExerciseFormData).subscribe(() => {});
 
-    const createReq = httpMock.expectOne('http://localhost:3333/exercises');
+    const createReq = httpMock.expectOne(
+      'https://gymlogic-back.onrender.com/exercises'
+    );
     expect(createReq.request.method).toBe('POST');
     createReq.flush({});
   });
@@ -38,7 +40,9 @@ describe('RepoExerciseService', () => {
   it('should send a GET request when calling getAll', () => {
     repoExerciseService.getAll().subscribe(() => {});
 
-    const getAllReq = httpMock.expectOne('http://localhost:3333/exercises');
+    const getAllReq = httpMock.expectOne(
+      'https://gymlogic-back.onrender.com/exercises'
+    );
     expect(getAllReq.request.method).toBe('GET');
     getAllReq.flush({});
   });
@@ -46,7 +50,7 @@ describe('RepoExerciseService', () => {
     repoExerciseService.getById('test').subscribe(() => {});
 
     const getByIdReq = httpMock.expectOne(
-      'http://localhost:3333/exercises/test'
+      'https://gymlogic-back.onrender.com/exercises/test'
     );
     expect(getByIdReq.request.method).toBe('GET');
     getByIdReq.flush({});
@@ -60,7 +64,9 @@ describe('RepoExerciseService', () => {
       },
     });
 
-    const registerReq = httpMock.expectOne('http://localhost:3333/exercises');
+    const registerReq = httpMock.expectOne(
+      'https://gymlogic-back.onrender.com/exercises'
+    );
     expect(registerReq.request.method).toBe('POST');
     registerReq.flush(
       { message: 'test' },
@@ -77,7 +83,9 @@ describe('RepoExerciseService', () => {
       },
     });
 
-    const getAllReq = httpMock.expectOne('http://localhost:3333/exercises');
+    const getAllReq = httpMock.expectOne(
+      'https://gymlogic-back.onrender.com/exercises'
+    );
     expect(getAllReq.request.method).toBe('GET');
     getAllReq.flush(
       { message: 'test' },
@@ -94,7 +102,7 @@ describe('RepoExerciseService', () => {
     });
 
     const registerReq = httpMock.expectOne(
-      'http://localhost:3333/exercises/test'
+      'https://gymlogic-back.onrender.com/exercises/test'
     );
     expect(registerReq.request.method).toBe('GET');
     registerReq.flush(
