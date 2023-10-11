@@ -1,4 +1,5 @@
 import { Routine } from './routine.type';
+import { Trainer } from './trainer.type';
 
 export type Login = {
   userName: string;
@@ -6,15 +7,12 @@ export type Login = {
 };
 export type User = Login & {
   id: string;
-  userName: string;
+  role: 'admin' | 'user';
   email: string;
   age: number;
   height: number;
   weight: number;
-  actualRoutine: Routine;
-  role: 'admin' | 'user';
-};
-export type Logged = {
-  user: User;
-  token: string;
+  actualRoutine: { routine: Routine | null; isCompleted: boolean };
+  actualTrainer: Trainer | null;
+  completedRoutines: Routine[];
 };

@@ -22,6 +22,7 @@ export class RoutineFormComponent {
     this.errorMessage = '';
     this.routineForm = this.fb.group({
       name: ['', Validators.required],
+      days: ['', Validators.required],
       objective: ['', Validators.required],
       level: ['', Validators.required],
     });

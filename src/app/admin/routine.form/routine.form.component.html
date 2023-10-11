@@ -1,8 +1,15 @@
 <a [routerLink]="'/adminHome' ">volver a home</a>
 <form [formGroup]="routineForm" (submit)="handleSubmit()">
   <input type="text" placeholder="Nombre" formControlName="name">
+  <input type="number" placeholder="Dias" formControlName="days">
   <input type="text" placeholder="Objetivo" formControlName="objective">
-  <input type="text" placeholder="Nivel" formControlName="level">
+  <select formControlName="level">
+    <option selected disabled>Nivel</option>
+    <option>principiante</option>
+    <option>intermedio</option>
+    <option>avanzado</option>
+  </select>
+  <!-- <input type="text" placeholder="Nivel" formControlName="level"> -->
   <button type="input">Siguiente</button>
 </form>
 <span *ngIf="errorMessage">{{errorMessage}}</span>

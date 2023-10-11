@@ -8,7 +8,7 @@
 
 
 <section> <ng-container *ngFor="let routine of routines">
-    <ng-container *ngIf="routine.exercises.length>0">
+    <ng-container *ngIf="routine.training.length>0">
       <GymLogic-card [routine]="routine"
         [ngClass]="{'first':routines.indexOf(routine)%2 === 0,'second':routines.indexOf(routine)%2 !== 0}"></GymLogic-card>
     </ng-container>
