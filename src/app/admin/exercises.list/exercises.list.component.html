@@ -1,1 +1,7 @@
-<p>exercises.list works!</p>
+<form (submit)="findExercise($event)">
+  <input type="text" placeholder="Ejercicio">
+  <button type="submit">Buscar</button>
+</form>
+<div *ngFor="let exercise of exercises">
+  <GymLogic-exercise-card></GymLogic-exercise-card>
+</div>

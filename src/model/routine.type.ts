@@ -8,7 +8,7 @@ export type Routine = {
   level: 'principiante' | 'intermedio' | 'avanzado';
   training: [
     {
-      exercisesPerDay: [{ exercise: Exercise; sets: number; reps: number }];
+      exercisesPerday: [{ exercise: Exercise; sets: number; reps: number }];
     }
   ];
   isDeprecated: boolean;

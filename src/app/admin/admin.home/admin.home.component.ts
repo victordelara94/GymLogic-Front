@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { RepoRoutineService } from 'src/app/service/repo.routine.service';
 import { StateService } from 'src/app/service/state.service';
 import { Routine } from 'src/model/routine.type';
@@ -13,7 +14,8 @@ export class AdminHomeComponent implements OnInit {
   message: string;
   constructor(
     private routineRepo: RepoRoutineService,
-    private stateService: StateService
+    private stateService: StateService,
+    private router: ActivatedRoute
   ) {
     this.message = '';
     this.routines = [];
