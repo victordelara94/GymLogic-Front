@@ -4,8 +4,8 @@
   <div *ngIf="actualUser">
     <button (click)="handleClick()"><mat-icon>logout</mat-icon></button>
     <ng-container *ngIf="actualUser.user.actualRoutine">
-      <button
-        [routerLink]="[ '/routines/routine',actualUser.user.actualRoutine.id ]"><mat-icon>fitness_center</mat-icon></button>
+      <button *ngIf="actualUser.user.actualRoutine.routine"
+        [routerLink]="[ '/routines/routine',actualUser.user.actualRoutine.routine.id ]"><mat-icon>fitness_center</mat-icon></button>
     </ng-container>
   </div>
 </header>

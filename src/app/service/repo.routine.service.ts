@@ -12,7 +12,7 @@ export class RepoRoutineService {
   url: string;
   token: string = '';
   constructor(private http: HttpClient, private stateService: StateService) {
-    this.url = 'https://gymlogic-back.onrender.com/routines';
+    this.url = 'http://localhost:3333/routines';
     this.stateService.state$.subscribe((state) => {
       if (!state.actualUser) {
         this.token = '';

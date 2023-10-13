@@ -16,3 +16,7 @@ export type User = Login & {
   actualTrainer: Trainer | null;
   completedRoutines: Routine[];
 };
+export type Logged = {
+  user: User;
+  token: string;
+};

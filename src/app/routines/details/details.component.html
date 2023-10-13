@@ -2,15 +2,18 @@
   <a [routerLink]="[ '/routines/list' ]">volver</a>
   <h2>{{routine.name}}</h2>
   <div class="exercises">
-    <div class="exercise" *ngFor="let exercise of routine.exercises">
+    <div class="exercise" *ngFor="let day in routine.training[0].exercisesPerDay[0]">
 
-      <h3>{{exercise.name}}</h3>
-      <img src={{exercise.image.url}} alt={{exercise.name}} width="150">
+      <h3>{{day.exercise.name}}</h3>
+      <img src={{day.exercise.image.url}} alt={{day.exercise.name}} width="150">
       <div class="reps">
-        <span>{{exercise.sets}} x {{exercise.reps}}</span>
+        <span>{{day.exercise.sets}} x {{day.exercise.reps}}</span>
       </div>
     </div>
   </div>
-  <button *ngIf="actualUser && actualUser.user.actualRoutine?.id!==routine.id" (click)="addUserRoutine()">
-    <mat-icon>add_circle</mat-icon></button>
+  <ng-container *ngIf="actualUser">
+    <button *ngIf="actualUser.user.actualRoutine.routine && actualUser.user.actualRoutine.routine.id!==routine.id"
+      (click)="addUserRoutine()">
+      <mat-icon>add_circle</mat-icon></button>
+  </ng-container>
 </div>

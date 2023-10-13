@@ -5,9 +5,11 @@
       <span>Objetivo: {{routine.name}}.</span>
       <span>Objetivo: {{routine.objective}}.</span>
       <span>Nivel: {{routine.level}}.</span>
-      <ng-container *ngFor="let exercisesPerDay of routine.training[0].exercisesPerDay">
-        <ng-container *ngFor="let day in exercisesPerDay">
-          <span>{{day.exercise.name}}</span>
+      <ng-container *ngIf="routine.training[0]">
+        <ng-container *ngFor="let exercises in routine.training[0].exercisesPerDay[0]">
+          <ng-container *ngFor="let exercise of exercises">
+            <span>{{exercise.name}}</span>
+          </ng-container>
         </ng-container>
       </ng-container>
       <div>

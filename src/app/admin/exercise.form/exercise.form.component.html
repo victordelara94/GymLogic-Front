@@ -3,10 +3,8 @@
   <a [routerLink]="'/adminHome'">Volver a home</a>
 </div>
 <form [formGroup]="exerciseForm" (submit)="handleSubmit()">
-  <input type="test" placeholder="Ejercicio" formControlName="name">
+  <input type="text" placeholder="Ejercicio" formControlName="name">
   <input type="file" class='image' placeholder="Imagen" formControlName="image" (change)="uploadFile($event)">
-  <input type="number" placeholder="Series" formControlName="sets">
-  <input type="number" placeholder="Repeticiones" formControlName="reps">
   <button type="input">Añadir</button>
   <span *ngIf="message">{{message}}</span>
 </form>
