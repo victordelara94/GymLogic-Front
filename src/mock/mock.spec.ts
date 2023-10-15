@@ -1,5 +1,4 @@
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { ImgData } from 'src/types/image.type';
 import { StateService } from '../app/service/state.service';
 import { Exercise } from '../model/exercise.type';
 import { Routine } from '../model/routine.type';
@@ -60,19 +59,11 @@ export const mockLoginData = {} as Login;
 export const mockUserNoId = {} as Omit<User, 'id'>;
 export const mockRoutine: Routine = {
   id: 'test',
-  exercises: [
-    {
-      id: 'test2',
-      image: {} as ImgData,
-      name: 'test',
-      reps: 12,
-      sets: 10,
-    } as Exercise,
-  ],
+
   level: 'avanzado',
   name: 'test',
   objective: 'test',
-};
+} as Routine;
 export const mockRoutines = [mockRoutine] as Routine[];
 export const mockId = '';
 export const mockUsers = [] as User[];

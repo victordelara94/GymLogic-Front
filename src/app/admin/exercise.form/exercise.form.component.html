@@ -4,6 +4,7 @@
 </div>
 <form [formGroup]="exerciseForm" (submit)="handleSubmit()">
   <input type="text" placeholder="Ejercicio" formControlName="name">
+  <input type="text" placeholder="Músculo principal" formControlName="muscle">
   <input type="file" class='image' placeholder="Imagen" formControlName="image" (change)="uploadFile($event)">
   <button type="input">Añadir</button>
   <span *ngIf="message">{{message}}</span>

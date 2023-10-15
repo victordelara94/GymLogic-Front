@@ -45,6 +45,7 @@ describe('RoutineFormComponent', () => {
       name: 'test',
       objective: 'fuerza',
       level: 'intermedio',
+      days: 1,
     });
     spyOn(mockRoutineRepo, 'create').and.returnValue(
       of({ id: 'test' } as Routine)
@@ -57,6 +58,7 @@ describe('RoutineFormComponent', () => {
       name: 'test',
       objective: 'fuerza',
       level: '',
+      days: 1,
     });
 
     routineFormComponent.handleSubmit();
