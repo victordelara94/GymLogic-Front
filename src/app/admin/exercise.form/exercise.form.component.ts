@@ -25,6 +25,7 @@ export class ExerciseFormComponent {
     this.message = '';
     this.exerciseForm = this.fb.group({
       name: ['', Validators.required],
+      muscle: ['', Validators.required],
       image: ['', Validators.required],
     });
   }
@@ -44,10 +45,12 @@ export class ExerciseFormComponent {
     const data: Omit<Exercise, 'id'> = this.exerciseForm.value;
 
     this.fd.append('name', data.name);
+    this.fd.append('muscle', data.muscle);
     this.exerciseRepo.create(this.fd).subscribe({
       next: () => {
-        this.exerciseForm.setValue({ name: '', image: '' });
+        this.exerciseForm.setValue({ name: '', image: '', muscle: '' });
         this.fd.delete('name');
+        this.fd.delete('muscle');
         this.fd.delete('image');
         this.message = 'Ejercicio creado';
         setTimeout(() => (this.message = 'Puede crear otro ejercicio'), 1000);

@@ -27,27 +27,21 @@ describe('RepoRoutineService', () => {
   it('should send a POST request when calling create', () => {
     repoRoutineService.create(mockRoutine).subscribe(() => {});
 
-    const createReq = httpMock.expectOne(
-      'https://gymlogic-back.onrender.com/routines'
-    );
+    const createReq = httpMock.expectOne('http://localhost:3333/routines');
     expect(createReq.request.method).toBe('POST');
     createReq.flush({});
   });
   it('should send a GET request when calling getAll', () => {
     repoRoutineService.getAll().subscribe(() => {});
 
-    const createReq = httpMock.expectOne(
-      'https://gymlogic-back.onrender.com/routines'
-    );
+    const createReq = httpMock.expectOne('http://localhost:3333/routines');
     expect(createReq.request.method).toBe('GET');
     createReq.flush({});
   });
   it('should send a GET request when calling getById', () => {
     repoRoutineService.getById('test').subscribe(() => {});
 
-    const createReq = httpMock.expectOne(
-      'https://gymlogic-back.onrender.com/routines/test'
-    );
+    const createReq = httpMock.expectOne('http://localhost:3333/routines/test');
     expect(createReq.request.method).toBe('GET');
     createReq.flush({});
   });
@@ -55,7 +49,7 @@ describe('RepoRoutineService', () => {
     repoRoutineService.filterRoutines('test', 'test').subscribe(() => {});
 
     const createReq = httpMock.expectOne(
-      'https://gymlogic-back.onrender.com/routines/filter?key=test&value=test'
+      'http://localhost:3333/routines/filter?key=test&value=test'
     );
     expect(createReq.request.method).toBe('GET');
     createReq.flush({});
@@ -63,17 +57,17 @@ describe('RepoRoutineService', () => {
   it('should send a DELETE request when calling delete', () => {
     repoRoutineService.delete('test').subscribe(() => {});
 
-    const createReq = httpMock.expectOne(
-      'https://gymlogic-back.onrender.com/routines/test'
-    );
+    const createReq = httpMock.expectOne('http://localhost:3333/routines/test');
     expect(createReq.request.method).toBe('DELETE');
     createReq.flush({});
   });
   it('should send a PATCH request when calling addExercise', () => {
-    repoRoutineService.addExercise('test', mockExercise).subscribe(() => {});
+    repoRoutineService
+      .addExercise('test', mockExercise, 5, 2)
+      .subscribe(() => {});
 
     const createReq = httpMock.expectOne(
-      'https://gymlogic-back.onrender.com/routines/test'
+      'http://localhost:3333/routines/addExercise/test'
     );
     expect(createReq.request.method).toBe('PATCH');
     createReq.flush({});
@@ -87,9 +81,7 @@ describe('RepoRoutineService', () => {
       },
     });
 
-    const createReq = httpMock.expectOne(
-      'https://gymlogic-back.onrender.com/routines'
-    );
+    const createReq = httpMock.expectOne('http://localhost:3333/routines');
     expect(createReq.request.method).toBe('POST');
     createReq.flush(
       { message: 'test' },
@@ -105,9 +97,7 @@ describe('RepoRoutineService', () => {
       },
     });
 
-    const createReq = httpMock.expectOne(
-      'https://gymlogic-back.onrender.com/routines'
-    );
+    const createReq = httpMock.expectOne('http://localhost:3333/routines');
     expect(createReq.request.method).toBe('GET');
     createReq.flush(
       { message: 'test' },
@@ -123,9 +113,7 @@ describe('RepoRoutineService', () => {
       },
     });
 
-    const createReq = httpMock.expectOne(
-      'https://gymlogic-back.onrender.com/routines/test'
-    );
+    const createReq = httpMock.expectOne('http://localhost:3333/routines/test');
     expect(createReq.request.method).toBe('GET');
     createReq.flush(
       { message: 'test' },
@@ -141,9 +129,7 @@ describe('RepoRoutineService', () => {
       },
     });
 
-    const createReq = httpMock.expectOne(
-      'https://gymlogic-back.onrender.com/routines/test'
-    );
+    const createReq = httpMock.expectOne('http://localhost:3333/routines/test');
     expect(createReq.request.method).toBe('DELETE');
     createReq.flush(
       { message: 'test' },
@@ -151,7 +137,7 @@ describe('RepoRoutineService', () => {
     );
   });
   it('should handle error in addExercise', () => {
-    repoRoutineService.addExercise('test', mockExercise).subscribe({
+    repoRoutineService.addExercise('test', mockExercise, 5, 2).subscribe({
       next: () => {},
       error: (error) => {
         expect(error).toBeTruthy();
@@ -160,7 +146,7 @@ describe('RepoRoutineService', () => {
     });
 
     const createReq = httpMock.expectOne(
-      'https://gymlogic-back.onrender.com/routines/test'
+      'http://localhost:3333/routines/addExercise/test'
     );
     expect(createReq.request.method).toBe('PATCH');
     createReq.flush(

@@ -50,8 +50,7 @@ describe('ExerciseFormComponent', () => {
     exerciseFormComponent.exerciseForm.setValue({
       name: 'test',
       image: '',
-      sets: 8,
-      reps: 7,
+      muscle: 'test',
     });
     mockForm.dispatchEvent(new Event('submit'));
     expect(exerciseFormComponent.handleSubmit).toHaveBeenCalled;
@@ -64,8 +63,7 @@ describe('ExerciseFormComponent', () => {
     exerciseFormComponent.exerciseForm.setValue({
       name: 'test',
       image: '',
-      sets: 8,
-      reps: 7,
+      muscle: 'test',
     });
     exerciseFormComponent.exerciseForm.get('image')!.clearValidators();
     exerciseFormComponent.exerciseForm.get('image')!.updateValueAndValidity();
@@ -78,8 +76,7 @@ describe('ExerciseFormComponent', () => {
     exerciseFormComponent.exerciseForm.setValue({
       name: 'test',
       image: '',
-      sets: 8,
-      reps: 7,
+      muscle: 'test',
     });
     exerciseFormComponent.exerciseForm.get('image')!.clearValidators();
     exerciseFormComponent.exerciseForm.get('image')!.updateValueAndValidity();

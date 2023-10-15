@@ -68,14 +68,23 @@ export class RepoRoutineService {
     return response;
   }
 
-  addExercise(id: Routine['id'], exercise: Exercise): Observable<Routine> {
-    const url = this.url + `/${id}`;
+  addExercise(
+    id: Routine['id'],
+    exercise: Exercise,
+    reps: Number,
+    sets: Number
+  ): Observable<Routine> {
+    const url = this.url + `/addExercise/${id}`;
     const response = this.http
-      .patch<Routine>(url, exercise, {
-        headers: {
-          ['Authorization']: `Bearer ${this.token}`,
-        },
-      })
+      .patch<Routine>(
+        url,
+        { exercise, sets, reps },
+        {
+          headers: {
+            ['Authorization']: `Bearer ${this.token}`,
+          },
+        }
+      )
       .pipe(catchError((error) => throwError(() => error)));
     return response;
   }
@@ -88,6 +97,20 @@ export class RepoRoutineService {
         },
       })
       .pipe(catchError((error) => throwError(() => error.error)));
+    return response;
+  }
+  updateRoutine(
+    partialRoutine: Partial<Routine>,
+    id: Routine['id']
+  ): Observable<Routine> {
+    const url = this.url + '/' + id;
+    const response = this.http
+      .patch<Routine>(url, partialRoutine, {
+        headers: {
+          ['Authorization']: `Bearer ${this.token}`,
+        },
+      })
+      .pipe(catchError((error) => throwError(() => error.errorMessage)));
     return response;
   }
 }

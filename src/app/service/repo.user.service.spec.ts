@@ -30,7 +30,7 @@ describe('RepoUserService', () => {
     repoUserService.create(mockUserNoId).subscribe(() => {});
 
     const createReq = httpMock.expectOne(
-      'https://gymlogic-back.onrender.com/users/register'
+      'http://localhost:3333/users/register'
     );
     expect(createReq.request.method).toBe('POST');
     createReq.flush({});
@@ -39,9 +39,7 @@ describe('RepoUserService', () => {
   it('should send a PATCH request when calling login', () => {
     repoUserService.login(mockLoginData).subscribe(() => {});
 
-    const loginReq = httpMock.expectOne(
-      'https://gymlogic-back.onrender.com/users/login'
-    );
+    const loginReq = httpMock.expectOne('http://localhost:3333/users/login');
     expect(loginReq.request.method).toBe('PATCH');
     loginReq.flush({});
   });
@@ -49,7 +47,7 @@ describe('RepoUserService', () => {
     repoUserService.addActualRoutine(mockRoutine.id).subscribe(() => {});
 
     const addActualRoutineReq = httpMock.expectOne(
-      'https://gymlogic-back.onrender.com/users'
+      'http://localhost:3333/users'
     );
     expect(addActualRoutineReq.request.method).toBe('PATCH');
     addActualRoutineReq.flush({});
@@ -57,18 +55,14 @@ describe('RepoUserService', () => {
   it('should send a GET request when calling getAll', () => {
     repoUserService.getAll().subscribe(() => {});
 
-    const getAllReq = httpMock.expectOne(
-      'https://gymlogic-back.onrender.com/users'
-    );
+    const getAllReq = httpMock.expectOne('http://localhost:3333/users');
     expect(getAllReq.request.method).toBe('GET');
     getAllReq.flush({});
   });
   it('should send a GET request when calling getById', () => {
     repoUserService.getById('test').subscribe(() => {});
 
-    const getByIdReq = httpMock.expectOne(
-      'https://gymlogic-back.onrender.com/users/test'
-    );
+    const getByIdReq = httpMock.expectOne('http://localhost:3333/users/test');
     expect(getByIdReq.request.method).toBe('GET');
     getByIdReq.flush({});
   });
@@ -82,7 +76,7 @@ describe('RepoUserService', () => {
     });
 
     const registerReq = httpMock.expectOne(
-      'https://gymlogic-back.onrender.com/users/register'
+      'http://localhost:3333/users/register'
     );
     expect(registerReq.request.method).toBe('POST');
     registerReq.flush(
@@ -99,9 +93,7 @@ describe('RepoUserService', () => {
       }
     );
 
-    const loginReq = httpMock.expectOne(
-      'https://gymlogic-back.onrender.com/users/login'
-    );
+    const loginReq = httpMock.expectOne('http://localhost:3333/users/login');
     expect(loginReq.request.method).toBe('PATCH');
     loginReq.flush(
       { message: '401 Unauthorized' },
@@ -118,7 +110,7 @@ describe('RepoUserService', () => {
     );
 
     const addActualRoutineReq = httpMock.expectOne(
-      'https://gymlogic-back.onrender.com/users'
+      'http://localhost:3333/users'
     );
     expect(addActualRoutineReq.request.method).toBe('PATCH');
     addActualRoutineReq.flush(
@@ -127,17 +119,15 @@ describe('RepoUserService', () => {
     );
   });
   it('should handle error in getAll', () => {
-    repoUserService.getAll().subscribe(
-      () => {},
-      (error) => {
+    repoUserService.getAll().subscribe({
+      next: () => {},
+      error: (error) => {
         expect(error).toBeTruthy();
         expect(error.status).toBe(401);
-      }
-    );
+      },
+    });
 
-    const getAllReq = httpMock.expectOne(
-      'https://gymlogic-back.onrender.com/users'
-    );
+    const getAllReq = httpMock.expectOne('http://localhost:3333/users');
     expect(getAllReq.request.method).toBe('GET');
     getAllReq.flush(
       { message: 'test' },
