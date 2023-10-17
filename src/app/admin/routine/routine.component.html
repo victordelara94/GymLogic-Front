@@ -1,4 +1,4 @@
-<ng-container *ngIf="routine">
+<div *ngIf="routine">
 
   <h2>{{routine.name}}</h2>
   <h3>{{routine.objective}}</h3>
@@ -12,7 +12,9 @@
         <li>{{fullExercise.exercise.image}}</li>
         <li>{{fullExercise.sets}} x {{fullExercise.reps}}</li>
       </ul>
-      <button>Añadir ejercicio</button>
+      <button (click)="openModal()">Añadir ejercicio</button>
     </section>
   </div>
-</ng-container>
+</div>
+
+<GymLogic-exercises-list *ngIf="isModalOpen"></GymLogic-exercises-list>

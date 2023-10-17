@@ -13,6 +13,7 @@ export class RoutineComponent implements OnInit {
   routine!: Routine;
   errorMessage: string = '';
   days: {}[] = [];
+  isModalOpen: boolean = false;
   constructor(
     private routineRepo: RepoRoutineService,
     private route: ActivatedRoute
@@ -28,5 +29,8 @@ export class RoutineComponent implements OnInit {
   createTrainingArray(day: number) {
     const emptyArray = Array.from({ length: day }, () => ({}));
     this.days = emptyArray;
+  }
+  openModal() {
+    this.isModalOpen = true;
   }
 }

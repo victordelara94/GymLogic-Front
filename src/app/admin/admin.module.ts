@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminHomeComponent } from './admin.home/admin.home.component';
+import { ExerciseCardComponent } from './exercise.card/exercise.card.component';
 import { ExerciseFormComponent } from './exercise.form/exercise.form.component';
 import { ExercisesListComponent } from './exercises.list/exercises.list.component';
 import { RoutineFormComponent } from './routine.form/routine.form.component';
@@ -16,6 +17,7 @@ import { RoutineComponent } from './routine/routine.component';
     ExerciseFormComponent,
     ExercisesListComponent,
     RoutineComponent,
+    ExerciseCardComponent,
   ],
   imports: [CommonModule, AdminRoutingModule, ReactiveFormsModule],
 })
