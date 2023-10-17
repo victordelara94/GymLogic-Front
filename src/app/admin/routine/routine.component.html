@@ -1,0 +1,18 @@
+<ng-container *ngIf="routine">
+
+  <h2>{{routine.name}}</h2>
+  <h3>{{routine.objective}}</h3>
+
+  <div>
+    <section *ngFor="let day of routine.training">
+      <h3>Día {{day.day}}</h3>
+      <ul *ngFor="let fullExercise of day.exercisesPerDay">
+        <li>{{fullExercise.exercise.name}}</li>
+        <li>{{fullExercise.exercise.muscle}}</li>
+        <li>{{fullExercise.exercise.image}}</li>
+        <li>{{fullExercise.sets}} x {{fullExercise.reps}}</li>
+      </ul>
+      <button>Añadir ejercicio</button>
+    </section>
+  </div>
+</ng-container>
