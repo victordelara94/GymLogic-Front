@@ -6,10 +6,11 @@ export type Routine = {
   name: string;
   objective: string;
   level: 'principiante' | 'intermedio' | 'avanzado';
-  training: [
-    {
-      exercisesPerDay: [{ exercise: Exercise; sets: number; reps: number }];
-    }
-  ];
+  training: {
+    day: number;
+    exercisesPerDay: fullExercise[];
+  }[];
   isDeprecated: boolean;
 };
+
+export type fullExercise = { exercise: Exercise; sets: number; reps: number };

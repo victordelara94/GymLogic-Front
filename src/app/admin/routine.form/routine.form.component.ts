@@ -27,17 +27,29 @@ export class RoutineFormComponent {
       level: ['', Validators.required],
     });
   }
+
   handleSubmit() {
     this.errorMessage = '';
+
     if (!this.routineForm.valid) {
       this.errorMessage = 'Por favor rellene todos los campos';
       return;
     }
+
     const data: Partial<Routine> = this.routineForm.value;
+    data.training = [];
+    for (let day = 1; day < data.days! + 1; day++) {
+      data.training.push({
+        day: day,
+        exercisesPerDay: [],
+      });
+    }
+    console.log(data);
+    data.training;
     this.repoRoutine.create(data).subscribe({
       next: (routine) => {
         this.stateService.setActualRoutine(routine);
-        this.router.navigate(['adminHome/addExercise', routine.id]);
+        this.router.navigate(['adminHome/routine', routine.id]);
       },
       error: (error: Error) => {
         this.errorMessage = error.message;

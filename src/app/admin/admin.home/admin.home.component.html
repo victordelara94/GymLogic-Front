@@ -5,21 +5,21 @@
       <span>Objetivo: {{routine.name}}.</span>
       <span>Objetivo: {{routine.objective}}.</span>
       <span>Nivel: {{routine.level}}.</span>
-      <ng-container *ngIf="routine.training[0]">
-        <ng-container *ngFor="let exercises in routine.training[0].exercisesPerDay[0]">
-          <ng-container *ngFor="let exercise of exercises">
-            <span>{{exercise.name}}</span>
+      <ng-container *ngIf="routine.training">
+        <ng-container *ngFor="let exerciseWithDay of routine.training">
+          <ng-container *ngFor="let fullExercise of exerciseWithDay.exercisesPerDay">
+
+            <span>{{fullExercise.exercise.name}}</span>
           </ng-container>
         </ng-container>
+        <div>
+          <span (click)="deleteRoutine(routine.id)">❌</span>
+          <a [routerLink]="[ 'routine', routine.id ]">
+            ✏️
+          </a>
+        </div>
       </ng-container>
-      <div>
-        <span (click)="deleteRoutine(routine.id)">❌</span>
-        <a [routerLink]="[ 'addExercise', routine.id ]">
-          ✏️
-        </a>
-      </div>
     </li>
-
   </ng-container>
 </ul>
 <a class="añadir" [routerLink]="[ 'addRoutine']">Añadir rutina</a>

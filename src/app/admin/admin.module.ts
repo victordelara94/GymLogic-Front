@@ -7,6 +7,7 @@ import { AdminHomeComponent } from './admin.home/admin.home.component';
 import { ExerciseFormComponent } from './exercise.form/exercise.form.component';
 import { ExercisesListComponent } from './exercises.list/exercises.list.component';
 import { RoutineFormComponent } from './routine.form/routine.form.component';
+import { RoutineComponent } from './routine/routine.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { RoutineFormComponent } from './routine.form/routine.form.component';
     RoutineFormComponent,
     ExerciseFormComponent,
     ExercisesListComponent,
+    RoutineComponent,
   ],
   imports: [CommonModule, AdminRoutingModule, ReactiveFormsModule],
 })
