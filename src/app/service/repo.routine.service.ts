@@ -70,15 +70,16 @@ export class RepoRoutineService {
 
   addExercise(
     id: Routine['id'],
+    day: number,
     exercise: Exercise,
-    reps: Number,
-    sets: Number
+    reps: number,
+    sets: number
   ): Observable<Routine> {
     const url = this.url + `/addExercise/${id}`;
     const response = this.http
       .patch<Routine>(
         url,
-        { exercise, sets, reps },
+        { exercise, day, sets, reps },
         {
           headers: {
             ['Authorization']: `Bearer ${this.token}`,

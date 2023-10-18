@@ -12,9 +12,9 @@
         <li><img src={{fullExercise.exercise.image.url}} alt={{fullExercise.exercise.name}}></li>
         <li>{{fullExercise.sets}} x {{fullExercise.reps}}</li>
       </ul>
-      <button (click)="openModal()">Añadir ejercicio</button>
+      <button (click)="openModal(day.day)">Añadir ejercicio</button>
     </section>
   </div>
 </div>
 
-<GymLogic-exercises-list *ngIf="isOpen" (isOpen)="closeModal($event)"></GymLogic-exercises-list>
+<GymLogic-exercises-list *ngIf="isOpen" (isOpen)="closeModal($event)" [id]="id" [day]="day"></GymLogic-exercises-list>

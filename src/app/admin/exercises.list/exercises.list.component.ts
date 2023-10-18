@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RepoExerciseService } from 'src/app/service/repo.exercise.service';
+import { RepoRoutineService } from 'src/app/service/repo.routine.service';
 import { Exercise } from 'src/model/exercise.type';
 
 @Component({
@@ -8,9 +9,15 @@ import { Exercise } from 'src/model/exercise.type';
   styleUrls: ['./exercises.list.component.scss'],
 })
 export class ExercisesListComponent {
+  @Input() id!: string;
+  @Input() day!: number;
+
   exercises: Exercise[] = [];
   @Output() isOpen: EventEmitter<boolean>;
-  constructor(private exerciseRepo: RepoExerciseService) {
+  constructor(
+    private exerciseRepo: RepoExerciseService,
+    private routineRepo: RepoRoutineService
+  ) {
     this.exerciseRepo.getAll().subscribe({
       next: (response) => (this.exercises = response),
     });
@@ -36,7 +43,10 @@ export class ExercisesListComponent {
       });
     }
   }
-  closeModal() {
+  emitEventValue() {
     this.isOpen.emit(false);
+  }
+  addExerciseToRoutine(ev: Exercise) {
+    this.routineRepo.addExercise(this.id, this.day, ev, 10, 5); //añadir inputs para seleccionar repes y series
   }
 }

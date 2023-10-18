@@ -1,6 +1,6 @@
 <ul>
   <li>{{exercise.name}}</li>
   <li>{{exercise.muscle}}</li>
-  <li><img src={{exercise.image.url}} alt={{exercise.name}}></li>
-  <button (click)="pushExercise()">+</button>
+  <li><img src={{exercise.image.url}} alt={{exercise.name}} width="150"></li>
+  <button (click)="emitExercise(exercise)">+</button>
 </ul>

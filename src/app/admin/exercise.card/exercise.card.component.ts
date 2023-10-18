@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Exercise } from 'src/model/exercise.type';
 
 @Component({
@@ -7,8 +7,12 @@ import { Exercise } from 'src/model/exercise.type';
   styleUrls: ['./exercise.card.component.scss'],
 })
 export class ExerciseCardComponent {
+  @Output() exerciseEmit: EventEmitter<Exercise>;
   @Input() exercise!: Exercise;
-
-  constructor() {}
-  pushExercise() {}
+  constructor() {
+    this.exerciseEmit = new EventEmitter();
+  }
+  emitExercise(exercise: Exercise) {
+    this.exerciseEmit.emit(exercise);
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RepoRoutineService } from 'src/app/service/repo.routine.service';
 import { Routine } from 'src/model/routine.type';
@@ -10,10 +10,10 @@ import { Routine } from 'src/model/routine.type';
 })
 export class RoutineComponent implements OnInit {
   id: Routine['id'];
+  day!: number;
   routine!: Routine;
   errorMessage: string = '';
-  days: {}[] = [];
-  @Input() isOpen: boolean;
+  isOpen: boolean;
   constructor(
     private routineRepo: RepoRoutineService,
     private route: ActivatedRoute
@@ -27,12 +27,10 @@ export class RoutineComponent implements OnInit {
       error: () => (this.errorMessage = 'Rutina no encontrada'),
     });
   }
-  createTrainingArray(day: number) {
-    const emptyArray = Array.from({ length: day }, () => ({}));
-    this.days = emptyArray;
-  }
-  openModal() {
+
+  openModal(day: number) {
     this.isOpen = true;
+    this.day = day;
   }
   closeModal(ev: boolean) {
     this.isOpen = ev;
