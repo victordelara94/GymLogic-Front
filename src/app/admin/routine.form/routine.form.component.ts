@@ -44,7 +44,6 @@ export class RoutineFormComponent {
         exercisesPerDay: [],
       });
     }
-    console.log(data);
     data.training;
     this.repoRoutine.create(data).subscribe({
       next: (routine) => {

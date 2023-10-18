@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RepoRoutineService } from 'src/app/service/repo.routine.service';
 import { Routine } from 'src/model/routine.type';
@@ -13,11 +13,12 @@ export class RoutineComponent implements OnInit {
   routine!: Routine;
   errorMessage: string = '';
   days: {}[] = [];
-  isModalOpen: boolean = false;
+  @Input() isOpen: boolean;
   constructor(
     private routineRepo: RepoRoutineService,
     private route: ActivatedRoute
   ) {
+    this.isOpen = false;
     this.id = this.route.snapshot.paramMap.get('id')!;
   }
   ngOnInit(): void {
@@ -31,6 +32,9 @@ export class RoutineComponent implements OnInit {
     this.days = emptyArray;
   }
   openModal() {
-    this.isModalOpen = true;
+    this.isOpen = true;
+  }
+  closeModal(ev: boolean) {
+    this.isOpen = ev;
   }
 }

@@ -1,7 +1,11 @@
-<form (submit)="findExercise($event)">
-  <input type="text" placeholder="Ejercicio">
-  <button type="submit">Buscar</button>
+<button (click)="closeModal()">Cerrar</button>
+<form>
+  <input type=" text" placeholder="Ejercicio" name="name" #nameInput>
+  <button type="submit" (click)="searchExercises($event,nameInput.name,nameInput.value)">Buscar</button>
+  <input type=" text" placeholder="Músculo" name="muscle" #muscleInput>
+  <button type="submit" (click)="searchExercises($event,muscleInput.name,muscleInput.value)">Buscar</button>
 </form>
+
 <div *ngFor="let exercise of exercises">
-  <GymLogic-exercise-card></GymLogic-exercise-card>
+  <GymLogic-exercise-card [exercise]="exercise"></GymLogic-exercise-card>
 </div>

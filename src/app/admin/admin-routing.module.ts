@@ -8,7 +8,7 @@ import { RoutineComponent } from './routine/routine.component';
 const routes: Routes = [
   { path: 'adminHome', component: AdminHomeComponent },
   { path: 'adminHome/addRoutine', component: RoutineFormComponent },
-  { path: 'adminHome/addExercise', component: ExerciseFormComponent },
+  { path: 'adminHome/createExercise', component: ExerciseFormComponent },
   { path: 'adminHome/routine/:id', component: RoutineComponent },
 ];
 

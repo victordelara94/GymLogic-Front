@@ -45,4 +45,15 @@ export class RepoExerciseService {
       .pipe(catchError((error) => throwError(() => error)));
     return response;
   }
+  filterExercises(key: string, value: string): Observable<Exercise[]> {
+    const url = this.url + `/filter?key=${key}&value=${value}`;
+    const response = this.http
+      .get<Exercise[]>(url, {
+        headers: {
+          ['Authorization']: `Bearer ${this.token}`,
+        },
+      })
+      .pipe(catchError((error) => throwError(() => error.error)));
+    return response;
+  }
 }

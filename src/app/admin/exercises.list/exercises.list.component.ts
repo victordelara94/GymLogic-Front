@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { RepoExerciseService } from 'src/app/service/repo.exercise.service';
 import { Exercise } from 'src/model/exercise.type';
 
@@ -10,19 +9,34 @@ import { Exercise } from 'src/model/exercise.type';
 })
 export class ExercisesListComponent {
   exercises: Exercise[] = [];
-  constructor(
-    private exerciseRepo: RepoExerciseService,
-    private router: ActivatedRoute
-  ) {
+  @Output() isOpen: EventEmitter<boolean>;
+  constructor(private exerciseRepo: RepoExerciseService) {
     this.exerciseRepo.getAll().subscribe({
       next: (response) => (this.exercises = response),
     });
+    this.isOpen = new EventEmitter();
   }
-  findExercise(ev: Event) {
-    const form = ev.target as HTMLFormElement;
-    const filterExercises = this.exercises.filter((exercise) => {
-      exercise.name === (form.elements[0] as HTMLInputElement).value;
-    });
-    if (filterExercises.length) this.exercises = filterExercises;
+  searchExercises(event: Event, key: string, value: string) {
+    event.preventDefault();
+
+    if (key === 'name' && value) {
+      this.exerciseRepo.filterExercises(key, value).subscribe({
+        next: (response) => (this.exercises = response),
+      });
+      return;
+    }
+    if (key === 'muscle' && value) {
+      this.exerciseRepo.filterExercises('muscle', value).subscribe({
+        next: (response) => (this.exercises = response),
+      });
+      return;
+    } else {
+      this.exerciseRepo.getAll().subscribe({
+        next: (response) => (this.exercises = response),
+      });
+    }
+  }
+  closeModal() {
+    this.isOpen.emit(false);
   }
 }
