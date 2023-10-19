@@ -2,5 +2,10 @@
   <li>{{exercise.name}}</li>
   <li>{{exercise.muscle}}</li>
   <li><img src={{exercise.image.url}} alt={{exercise.name}} width="150"></li>
-  <button (click)="emitExercise(exercise)">+</button>
+  <form [formGroup]="fullExerciseForm" (submit)="setSetsAndReps()">
+    <input type="number" formControlName="sets">
+    <input type="number" formControlName="reps">
+    <button type="submit">+</button>
+  </form>
+
 </ul>

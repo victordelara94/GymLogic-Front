@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RepoExerciseService } from 'src/app/service/repo.exercise.service';
 import { RepoRoutineService } from 'src/app/service/repo.routine.service';
 import { Exercise } from 'src/model/exercise.type';
+import { fullExercise } from 'src/model/routine.type';
 
 @Component({
   selector: 'GymLogic-exercises-list',
@@ -11,7 +12,6 @@ import { Exercise } from 'src/model/exercise.type';
 export class ExercisesListComponent {
   @Input() id!: string;
   @Input() day!: number;
-
   exercises: Exercise[] = [];
   @Output() isOpen: EventEmitter<boolean>;
   constructor(
@@ -46,7 +46,10 @@ export class ExercisesListComponent {
   emitEventValue() {
     this.isOpen.emit(false);
   }
-  addExerciseToRoutine(ev: Exercise) {
-    this.routineRepo.addExercise(this.id, this.day, ev, 10, 5); //añadir inputs para seleccionar repes y series
+  addExerciseToRoutine(ev: fullExercise) {
+    this.routineRepo
+      .addExercise(this.id, this.day, ev.exercise, ev.reps, ev.sets)
+      .subscribe({ next: () => {} });
+    console.log(ev);
   }
 }

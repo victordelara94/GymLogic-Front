@@ -8,7 +8,6 @@
       <ng-container *ngIf="routine.training">
         <ng-container *ngFor="let exerciseWithDay of routine.training">
           <ng-container *ngFor="let fullExercise of exerciseWithDay.exercisesPerDay">
-
             <span>{{fullExercise.exercise.name}}</span>
           </ng-container>
         </ng-container>
