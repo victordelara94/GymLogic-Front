@@ -47,7 +47,7 @@ export class RoutineFormComponent {
     data.training;
     this.repoRoutine.create(data).subscribe({
       next: (routine) => {
-        this.stateService.setActualRoutine(routine);
+        this.stateService.setRoutine(routine);
         this.router.navigate(['adminHome/routine', routine.id]);
       },
       error: (error: Error) => {

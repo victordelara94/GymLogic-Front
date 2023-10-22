@@ -9,10 +9,10 @@ export type Routine = {
 
   training: {
     day: number;
-    exercisesPerDay: fullExercise[];
+    exercisesPerDay: FullExercise[];
   }[];
 
   isDeprecated: boolean;
 };
 
-export type fullExercise = { exercise: Exercise; sets: number; reps: number };
+export type FullExercise = { exercise: Exercise; sets: number; reps: number };

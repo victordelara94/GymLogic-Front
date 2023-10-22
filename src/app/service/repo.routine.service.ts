@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
-import { Exercise } from 'src/model/exercise.type';
-import { Routine } from 'src/model/routine.type';
+import { FullExercise, Routine } from 'src/model/routine.type';
 import { StateService } from './state.service';
 
 @Injectable({
@@ -71,15 +70,13 @@ export class RepoRoutineService {
   addExercise(
     id: Routine['id'],
     day: number,
-    exercise: Exercise,
-    reps: number,
-    sets: number
+    fullExercise: FullExercise
   ): Observable<Routine> {
     const url = this.url + `/addExercise/${id}`;
     const response = this.http
       .patch<Routine>(
         url,
-        { exercise, day, sets, reps },
+        { day, fullExercise },
         {
           headers: {
             ['Authorization']: `Bearer ${this.token}`,

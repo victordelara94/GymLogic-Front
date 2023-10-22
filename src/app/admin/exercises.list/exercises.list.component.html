@@ -7,6 +7,5 @@
 </form>
 
 <div *ngFor="let exercise of exercises">
-  <GymLogic-exercise-card [exercise]="exercise"
-    (fullExerciseEmit)="addExerciseToRoutine($event)"></GymLogic-exercise-card>
+  <GymLogic-exercise-card [exercise]="exercise"></GymLogic-exercise-card>
 </div>

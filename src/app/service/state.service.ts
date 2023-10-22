@@ -14,7 +14,9 @@ export class StateService {
     const initialState: State = {} as State;
     this.state$ = new BehaviorSubject(initialState);
   }
-
+  getState() {
+    return this.state$.asObservable();
+  }
   login(data: Logged) {
     this.state$.next({ ...this.state$.value, actualUser: data });
   }
@@ -25,6 +27,12 @@ export class StateService {
   setUsers(data: User[]) {
     this.state$.next({ ...this.state$.value, users: data });
   }
+  updateUser(user: User) {
+    this.state$.next({
+      ...this.state$.value,
+      actualUser: { ...this.state$.value.actualUser, user: user } as Logged,
+    });
+  }
   setRoutines(routines: Routine[]) {
     this.state$.next({ ...this.state$.value, routines });
   }
@@ -34,13 +42,11 @@ export class StateService {
     );
     this.state$.next({ ...this.state$.value, routines });
   }
-  setActualRoutine(actualRoutine: Routine) {
-    this.state$.next({ ...this.state$.value, actualRoutine });
+  setRoutine(routine: Routine) {
+    this.state$.next({ ...this.state$.value, routine });
   }
-  updateUser(user: User) {
-    this.state$.next({
-      ...this.state$.value,
-      actualUser: { ...this.state$.value.actualUser, user: user } as Logged,
-    });
+
+  setDay(day: number) {
+    this.state$.next({ ...this.state$.value, day });
   }
 }

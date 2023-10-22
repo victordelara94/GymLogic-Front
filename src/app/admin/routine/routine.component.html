@@ -9,7 +9,7 @@
       <ul *ngFor="let fullExercise of day.exercisesPerDay">
         <li>{{fullExercise.exercise.name}}</li>
         <li>{{fullExercise.exercise.muscle}}</li>
-        <li><img src={{fullExercise.exercise.image.url}} alt={{fullExercise.exercise.name}}></li>
+        <li><img src={{fullExercise.exercise.image.url}} alt={{fullExercise.exercise.name}} width="150"></li>
         <li>{{fullExercise.sets}} x {{fullExercise.reps}}</li>
       </ul>
       <button (click)="openModal(day.day)">Añadir ejercicio</button>
@@ -17,4 +17,4 @@
   </div>
 </div>
 
-<GymLogic-exercises-list *ngIf="isOpen" (isOpen)="closeModal($event)" [id]="id" [day]="day"></GymLogic-exercises-list>
+<GymLogic-exercises-list *ngIf="isOpen" (isOpen)="closeModal($event)"></GymLogic-exercises-list>

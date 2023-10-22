@@ -46,7 +46,7 @@ describe('StateService', () => {
   it('setActualRoutine', () => {
     const spyState = spyOn(service.state$, 'next').and.callThrough();
 
-    service.setActualRoutine(mockRoutine);
+    service.setRoutine(mockRoutine);
     expect(spyState).toHaveBeenCalled();
   });
 });
