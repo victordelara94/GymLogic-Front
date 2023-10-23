@@ -8,7 +8,7 @@ import { RepoRoutineService } from 'src/app/service/repo.routine.service';
 import { mockRoutineRepo } from 'src/mock/mock.spec';
 import { Routine } from 'src/model/routine.type';
 import { AdminHomeComponent } from '../admin.home/admin.home.component';
-import { ExerciseFormComponent } from '../exercise.form/exercise.form.component';
+import { ExercisesListComponent } from '../exercises.list/exercises.list.component';
 import { RoutineFormComponent } from './routine.form.component';
 
 describe('RoutineFormComponent', () => {
@@ -25,8 +25,8 @@ describe('RoutineFormComponent', () => {
         RouterTestingModule.withRoutes([
           { path: 'adminHome', component: AdminHomeComponent },
           {
-            path: 'adminHome/addExercise/test',
-            component: ExerciseFormComponent,
+            path: 'adminHome/routine/test',
+            component: ExercisesListComponent,
           },
         ]),
       ],

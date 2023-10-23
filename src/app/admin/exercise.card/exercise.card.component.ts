@@ -43,10 +43,13 @@ export class ExerciseCardComponent {
       sets: this.fullExerciseForm.value.sets,
       reps: this.fullExerciseForm.value.reps,
     };
+
     this.routineRepo
       .addExercise(this.routineId, this.day, fullExercise)
       .subscribe({
-        next: (updatedRoutine) => this.stateService.setRoutine(updatedRoutine),
+        next: (updatedRoutine) => {
+          this.stateService.setRoutine(updatedRoutine);
+        },
       });
   }
 }

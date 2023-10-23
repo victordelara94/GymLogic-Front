@@ -8,5 +8,7 @@ import { Routine } from 'src/model/routine.type';
 })
 export class CardComponent {
   @Input() routine!: Routine;
-  constructor() {}
+  constructor() {
+    this.routine = {} as Routine;
+  }
 }

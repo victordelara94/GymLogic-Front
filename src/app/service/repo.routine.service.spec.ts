@@ -3,7 +3,8 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { mockExercise, mockRoutine } from '../../mock/mock.spec';
+import { FullExercise } from 'src/model/routine.type';
+import { mockRoutine } from '../../mock/mock.spec';
 import { RepoRoutineService } from './repo.routine.service';
 
 describe('RepoRoutineService', () => {
@@ -63,7 +64,7 @@ describe('RepoRoutineService', () => {
   });
   it('should send a PATCH request when calling addExercise', () => {
     repoRoutineService
-      .addExercise('test', mockExercise, 5, 2)
+      .addExercise('test', 5, {} as FullExercise)
       .subscribe(() => {});
 
     const createReq = httpMock.expectOne(
@@ -137,7 +138,7 @@ describe('RepoRoutineService', () => {
     );
   });
   it('should handle error in addExercise', () => {
-    repoRoutineService.addExercise('test', mockExercise, 5, 2).subscribe({
+    repoRoutineService.addExercise('test', 5, {} as FullExercise).subscribe({
       next: () => {},
       error: (error) => {
         expect(error).toBeTruthy();

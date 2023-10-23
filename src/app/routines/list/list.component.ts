@@ -14,7 +14,7 @@ export class ListComponent implements OnInit {
     private routineRepo: RepoRoutineService,
     private stateService: StateService
   ) {
-    this.routines = [];
+    this.routines = [] as Routine[];
     this.stateService.state$.subscribe(
       (state) => (this.routines = state.routines)
     );

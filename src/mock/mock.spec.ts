@@ -59,7 +59,6 @@ export const mockLoginData = {} as Login;
 export const mockUserNoId = {} as Omit<User, 'id'>;
 export const mockRoutine: Routine = {
   id: 'test',
-
   level: 'avanzado',
   name: 'test',
   objective: 'test',
@@ -67,5 +66,5 @@ export const mockRoutine: Routine = {
 export const mockRoutines = [mockRoutine] as Routine[];
 export const mockId = '';
 export const mockUsers = [] as User[];
-export const mockExercise = {} as Exercise;
+export const mockExercise = { image: { url: 'test' } } as Exercise;
 export const mockExercises = [] as Exercise[];

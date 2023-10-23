@@ -23,12 +23,16 @@ export class DetailsComponent {
     private stateService: StateService
   ) {
     this.routine = {} as Routine;
+    this.actualUser = {} as Logged;
     this.stateService.state$.subscribe(
       (data) => (this.actualUser = data.actualUser)
     );
     this.id = this.route.snapshot.paramMap.get('id')!;
     this.routineRepo.getById(this.id).subscribe({
-      next: (routine) => (this.routine = routine),
+      next: (routine) => {
+        this.routine = routine;
+        this.stateService.setRoutine(routine);
+      },
     });
   }
   addUserRoutine() {

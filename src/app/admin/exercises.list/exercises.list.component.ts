@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RepoExerciseService } from 'src/app/service/repo.exercise.service';
-import { RepoRoutineService } from 'src/app/service/repo.routine.service';
 import { Exercise } from 'src/model/exercise.type';
 
 @Component({
@@ -12,10 +11,7 @@ export class ExercisesListComponent {
   @Input() id!: string;
   exercises: Exercise[] = [];
   @Output() isOpen: EventEmitter<boolean>;
-  constructor(
-    private exerciseRepo: RepoExerciseService,
-    private routineRepo: RepoRoutineService
-  ) {
+  constructor(private exerciseRepo: RepoExerciseService) {
     this.exerciseRepo.getAll().subscribe({
       next: (response) => (this.exercises = response),
     });
