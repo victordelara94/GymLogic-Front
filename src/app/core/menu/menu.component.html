@@ -1,0 +1,19 @@
+<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+  <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="emitProfile()">
+    <mat-icon>account_circle
+    </mat-icon>
+    <span>Perfil</span>
+  </button>
+  <button mat-menu-item disabled (click)="emitRoutine()">
+    <mat-icon>fitness_center
+    </mat-icon>
+    <span>Tú rutina</span>
+  </button>
+  <button mat-menu-item (click)="emitLogout()">
+    <mat-icon>logout</mat-icon>
+    <span>Desconectar</span>
+  </button>
+</mat-menu>

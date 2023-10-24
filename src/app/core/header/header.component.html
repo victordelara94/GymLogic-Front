@@ -2,10 +2,14 @@
   <img src="../../assets/favicon.png" alt="Logo of GymLogic" width="70" height="70">
   <h1><em>Gym</em>Logic</h1>
   <div *ngIf="actualUser">
-    <button (click)="handleClick()"><mat-icon>logout</mat-icon></button>
-    <ng-container *ngIf="actualUser.user.actualRoutine">
-      <button *ngIf="actualUser.user.actualRoutine.routine"
-        [routerLink]="[ '/routines/routine',actualUser.user.actualRoutine.routine.id ]"><mat-icon>fitness_center</mat-icon></button>
-    </ng-container>
+    <div>
+      <button (click)="handleClick()"><mat-icon>logout</mat-icon></button>
+      <ng-container *ngIf="actualUser.user.actualRoutine">
+        <button *ngIf="actualUser.user.actualRoutine.routine"
+          [routerLink]="[ '/routines/routine',actualUser.user.actualRoutine.routine.id ]"><mat-icon>fitness_center</mat-icon></button>
+      </ng-container>
+    </div>
   </div>
+  <GymLogic-menu (logOut)="try()" (profile)="try()" (userRoutine)="try()"></GymLogic-menu>
+
 </header>
