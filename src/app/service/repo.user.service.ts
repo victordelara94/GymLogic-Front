@@ -13,11 +13,13 @@ export class RepoUserService {
   token = '';
   constructor(private http: HttpClient, private stateService: StateService) {
     this.url = 'http://localhost:3333/users';
-    this.stateService.state$.subscribe((state) => {
+    this.stateService.getState().subscribe((state) => {
       if (!state.actualUser) {
+        console.log(state.actualUser);
         this.token = '';
         return;
       }
+
       this.token = state.actualUser?.token!;
     });
   }
@@ -31,8 +33,9 @@ export class RepoUserService {
   }
   login(data: Login): Observable<Logged> {
     const url = this.url + '/login';
-    const response = this.http.patch<Logged>(url, data);
-    response.pipe(catchError((error) => throwError(() => error.error.message)));
+    const response = this.http
+      .patch<Logged>(url, data)
+      .pipe(catchError((error) => throwError(() => error.error.message)));
 
     return response;
   }
@@ -57,11 +60,11 @@ export class RepoUserService {
       .pipe(catchError((error) => throwError(() => error.error.message)));
     return response;
   }
-  addActualRoutine(routine: Routine['id']): Observable<User> {
+  addActualRoutine(routineId: Routine['id']): Observable<User> {
     const response = this.http
       .patch<User>(
         this.url,
-        { actualRoutine: routine },
+        { actualRoutine: { routine: routineId } },
         {
           headers: {
             ['Authorization']: `Bearer ${this.token}`,

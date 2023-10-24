@@ -21,14 +21,15 @@ export class LoginComponent {
     private router: Router
   ) {
     this.errorMessage = null;
-    this.stateService.state$.subscribe(
-      (state) => (this.actualUser = state.actualUser)
-    );
+    this.stateService
+      .getState()
+      .subscribe((state) => (this.actualUser = state.actualUser));
 
     this.loginForm = this.fb.group({
-      userName: ['celia', [Validators.required, Validators.minLength(2)]],
+      userName: ['celia', [Validators.required]],
       password: ['123456', [Validators.required, Validators.minLength(6)]],
     });
+    console.log('test', this.actualUser?.user?.role);
   }
   handleSubmit() {
     this.errorMessage = null;

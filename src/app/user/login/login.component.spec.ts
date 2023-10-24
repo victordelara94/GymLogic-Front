@@ -10,13 +10,14 @@ import { ListComponent } from 'src/app/routines/list/list.component';
 import { RepoUserService } from 'src/app/service/repo.user.service';
 import { StateService } from 'src/app/service/state.service';
 import { Logged } from 'src/model/user.type';
-import { mockUserRepo } from '../../../mock/mock.spec';
+import { State } from 'src/types/state.type';
 import { LoginComponent } from './login.component';
 
 describe('LoginComponent', () => {
   let loginComponent: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
-
+  let state: StateService;
+  let repo: RepoUserService;
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [LoginComponent],
@@ -33,12 +34,15 @@ describe('LoginComponent', () => {
           { path: 'adminHome', component: AdminHomeComponent },
         ]),
       ],
-      providers: [
-        { provide: RepoUserService, useValue: mockUserRepo },
-        { provide: StateService },
-      ],
+      providers: [RepoUserService, StateService],
     }).compileComponents();
-
+    repo = TestBed.inject(RepoUserService);
+    state = TestBed.inject(StateService);
+    spyOn(state, 'getState').and.returnValue(
+      of({
+        actualUser: { user: { role: 'user' } } as unknown as Logged,
+      } as unknown as State)
+    );
     fixture = TestBed.createComponent(LoginComponent);
     loginComponent = fixture.componentInstance;
     loginComponent.actualUser = { user: { role: 'admin' } } as Logged;
@@ -50,15 +54,17 @@ describe('LoginComponent', () => {
     expect(loginComponent).toBeTruthy();
   });
 
-  it('loginHandleSubmit valid', () => {
-    spyOn(mockUserRepo, 'login').and.callThrough();
+  it('loginHandleSubmit valid with admin role', () => {
+    spyOn(repo, 'login').and.returnValue(
+      of({ user: { role: 'admin' } } as Logged)
+    );
 
     loginComponent.loginForm.setValue({
       userName: 'test',
       password: 'testeado',
     });
     loginComponent.handleSubmit();
-    expect(mockUserRepo.login).toHaveBeenCalled();
+    expect(repo.login).toHaveBeenCalled();
   });
   it('registerHandleSubmit not valid', () => {
     loginComponent.loginForm.setValue({
@@ -71,18 +77,56 @@ describe('LoginComponent', () => {
     );
   });
   it('RepoUserService throw an error', () => {
-    spyOn(mockUserRepo, 'login').and.returnValue(throwError(() => {}));
+    spyOn(repo, 'login').and.returnValue(throwError(() => {}));
 
     loginComponent.loginForm.setValue({
       userName: 'test',
       password: 'testeado',
     });
     loginComponent.handleSubmit();
-    expect(mockUserRepo.login).toHaveBeenCalled();
+    expect(repo.login).toHaveBeenCalled();
   });
-  it('if role is admin', () => {
-    spyOn(mockUserRepo, 'login').and.returnValue(
-      of({ role: 'admin' } as unknown as Logged)
+});
+describe('LoginComponent', () => {
+  let loginComponent: LoginComponent;
+  let fixture: ComponentFixture<LoginComponent>;
+  let state: StateService;
+  let repo: RepoUserService;
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [LoginComponent],
+      imports: [
+        HttpClientModule,
+        ReactiveFormsModule,
+        CommonModule,
+        RouterTestingModule.withRoutes([
+          {
+            path: 'routines/list',
+            component: ListComponent,
+          },
+          { path: 'home', component: HomeComponent },
+          { path: 'adminHome', component: AdminHomeComponent },
+        ]),
+      ],
+      providers: [RepoUserService, StateService],
+    }).compileComponents();
+    repo = TestBed.inject(RepoUserService);
+    state = TestBed.inject(StateService);
+    spyOn(state, 'getState').and.returnValue(
+      of({
+        actualUser: { user: { role: 'user' } } as unknown as Logged,
+      } as unknown as State)
+    );
+    fixture = TestBed.createComponent(LoginComponent);
+    loginComponent = fixture.componentInstance;
+    loginComponent.actualUser = { user: { role: 'user' } } as Logged;
+
+    fixture.detectChanges();
+  });
+
+  it('loginHandleSubmit valid and role is user', () => {
+    spyOn(repo, 'login').and.returnValue(
+      of({ user: { role: 'user' } } as Logged)
     );
 
     loginComponent.loginForm.setValue({
@@ -90,6 +134,6 @@ describe('LoginComponent', () => {
       password: 'testeado',
     });
     loginComponent.handleSubmit();
-    expect(mockUserRepo.login).toHaveBeenCalled();
+    expect(repo.login).toHaveBeenCalled();
   });
 });

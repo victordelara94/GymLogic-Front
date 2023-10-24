@@ -4,7 +4,7 @@ import { RepoRoutineService } from 'src/app/service/repo.routine.service';
 import { RepoUserService } from 'src/app/service/repo.user.service';
 import { StateService } from 'src/app/service/state.service';
 import { Routine } from 'src/model/routine.type';
-import { Logged, User } from 'src/model/user.type';
+import { User } from 'src/model/user.type';
 
 @Component({
   selector: 'GymLogic-details',
@@ -15,7 +15,8 @@ export class DetailsComponent {
   routine!: Routine;
   id!: string;
   message!: string;
-  actualUser!: Logged | null;
+  user!: User;
+  actualRoutineId: string = '';
   constructor(
     private routineRepo: RepoRoutineService,
     private userRepo: RepoUserService,
@@ -23,10 +24,14 @@ export class DetailsComponent {
     private stateService: StateService
   ) {
     this.routine = {} as Routine;
-    this.actualUser = {} as Logged;
-    this.stateService.state$.subscribe(
-      (data) => (this.actualUser = data.actualUser)
-    );
+    this.user = {} as User;
+    this.stateService.getState().subscribe({
+      next: (data) => {
+        this.user = data.actualUser?.user!;
+        this.actualRoutineId = data.actualUser?.user.actualRoutine.routine?.id!;
+        console.log(data.actualUser?.user);
+      },
+    });
     this.id = this.route.snapshot.paramMap.get('id')!;
     this.routineRepo.getById(this.id).subscribe({
       next: (routine) => {
@@ -37,10 +42,15 @@ export class DetailsComponent {
   }
   addUserRoutine() {
     this.userRepo.addActualRoutine(this.routine.id).subscribe({
-      next: (user: User) => {
+      next: (user) => {
         this.message = 'Rutina añadida a su usuario: ' + this.routine.name;
         this.stateService.updateUser(user);
+        this.user = user;
       },
     });
+  }
+  isCompleted(ev: Event) {
+    const checkboxValue = (ev.target as HTMLInputElement).checked;
+    // this.userRepo.addActualRoutine(this.routine.id, checkboxValue);
   }
 }

@@ -3,17 +3,25 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
+import { Logged } from 'src/model/user.type';
+import { State } from 'src/types/state.type';
 import { mockLoginData, mockRoutine, mockUserNoId } from '../../mock/mock.spec';
 import { RepoUserService } from './repo.user.service';
+import { StateService } from './state.service';
 describe('RepoUserService', () => {
   let repoUserService: RepoUserService;
   let httpMock: HttpTestingController;
-
+  let state: StateService;
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [RepoUserService],
+      providers: [RepoUserService, StateService],
     });
+    state = TestBed.inject(StateService);
+    spyOn(state, 'getState').and.returnValue(
+      of({ actualUser: { token: 'test' } as Logged } as State)
+    );
     repoUserService = TestBed.inject(RepoUserService);
     httpMock = TestBed.inject(HttpTestingController);
   });
@@ -71,7 +79,7 @@ describe('RepoUserService', () => {
       next: () => {},
       error: (error) => {
         expect(error).toBeTruthy();
-        expect(error.message).toBe('');
+        expect(error.message).toBe('test');
       },
     });
 
@@ -80,18 +88,18 @@ describe('RepoUserService', () => {
     );
     expect(registerReq.request.method).toBe('POST');
     registerReq.flush(
-      { message: '' },
+      { message: 'test' },
       { status: 500, statusText: 'Internal Server Error' }
     );
   });
   it('should handle error in login', () => {
-    repoUserService.login(mockLoginData).subscribe(
-      () => {},
-      (error) => {
+    repoUserService.login(mockLoginData).subscribe({
+      next: () => {},
+      error: (error) => {
         expect(error).toBeTruthy();
-        expect(error.error.message).toBe('401 Unauthorized');
-      }
-    );
+        expect(error).toBe('401 Unauthorized');
+      },
+    });
 
     const loginReq = httpMock.expectOne('http://localhost:3333/users/login');
     expect(loginReq.request.method).toBe('PATCH');
@@ -133,5 +141,39 @@ describe('RepoUserService', () => {
       { message: 'test' },
       { status: 401, statusText: 'Unauthorized' }
     );
+  });
+  it('should handle error in getById', () => {
+    repoUserService.getById('test').subscribe({
+      next: () => {},
+      error: (error) => {
+        expect(error).toBeTruthy();
+        expect(error).toBe('test');
+      },
+    });
+
+    const getByIdReq = httpMock.expectOne('http://localhost:3333/users/test');
+    expect(getByIdReq.request.method).toBe('GET');
+    getByIdReq.flush(
+      { message: 'test' },
+      { status: 401, statusText: 'Unauthorized' }
+    );
+  });
+});
+describe('RepoUserService', () => {
+  let repoUserService: RepoUserService;
+  let httpMock: HttpTestingController;
+  let state: StateService;
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [StateService],
+    });
+    state = TestBed.inject(StateService);
+    spyOn(state, 'getState').and.returnValue(of({} as State));
+    repoUserService = TestBed.inject(RepoUserService);
+    httpMock = TestBed.inject(HttpTestingController);
+  });
+  it('should be created', () => {
+    expect(repoUserService).toBeTruthy();
   });
 });

@@ -12,7 +12,7 @@ export class RepoExerciseService {
   token: string = '';
   constructor(private http: HttpClient, private stateService: StateService) {
     this.url = 'http://localhost:3333/exercises';
-    this.stateService.state$.subscribe((state) => {
+    this.stateService.getState().subscribe((state) => {
       if (!state.actualUser) {
         this.token = '';
         return;

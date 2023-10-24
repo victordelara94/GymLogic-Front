@@ -10,6 +10,7 @@ import { StateService } from './state.service';
 export class RepoRoutineService {
   url: string;
   token: string = '';
+
   constructor(private http: HttpClient, private stateService: StateService) {
     this.url = 'http://localhost:3333/routines';
     this.stateService.state$.subscribe((state) => {
@@ -108,7 +109,7 @@ export class RepoRoutineService {
           ['Authorization']: `Bearer ${this.token}`,
         },
       })
-      .pipe(catchError((error) => throwError(() => error.errorMessage)));
+      .pipe(catchError((error) => throwError(() => error.error)));
     return response;
   }
 }

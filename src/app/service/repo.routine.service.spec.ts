@@ -73,6 +73,15 @@ describe('RepoRoutineService', () => {
     expect(createReq.request.method).toBe('PATCH');
     createReq.flush({});
   });
+  it('should send a PATCH request when calling updateRoutine', () => {
+    repoRoutineService.updateRoutine({}, 'test').subscribe(() => {});
+
+    const updateRoutineReq = httpMock.expectOne(
+      'http://localhost:3333/routines/test'
+    );
+    expect(updateRoutineReq.request.method).toBe('PATCH');
+    updateRoutineReq.flush({});
+  });
   it('should handle error in create', () => {
     repoRoutineService.create(mockRoutine).subscribe({
       next: () => {},
@@ -152,6 +161,40 @@ describe('RepoRoutineService', () => {
     expect(createReq.request.method).toBe('PATCH');
     createReq.flush(
       { message: 'test' },
+      { status: 500, statusText: 'Internal Server Error' }
+    );
+  });
+  it('should handle error in filterRoutines', () => {
+    repoRoutineService.filterRoutines('test', 'test').subscribe({
+      next: () => {},
+      error: (error) => {
+        expect(error).toBeTruthy();
+        expect(error.message).toBe('test');
+      },
+    });
+
+    const filterRoutinesReq = httpMock.expectOne(
+      'http://localhost:3333/routines/filter?key=test&value=test'
+    );
+    expect(filterRoutinesReq.request.method).toBe('GET');
+    filterRoutinesReq.flush(
+      { message: 'test' },
+      { status: 500, statusText: 'Internal Server Error' }
+    );
+  });
+  it('should handle error in updateRoutine', () => {
+    repoRoutineService.updateRoutine({}, 'test').subscribe({
+      next: () => {},
+      error: (error) => {
+        expect(error).toBeTruthy();
+        expect(error.errorMessage).toBe('test');
+      },
+    });
+
+    const createReq = httpMock.expectOne('http://localhost:3333/routines/test');
+    expect(createReq.request.method).toBe('PATCH');
+    createReq.flush(
+      { errorMessage: 'test' },
       { status: 500, statusText: 'Internal Server Error' }
     );
   });
